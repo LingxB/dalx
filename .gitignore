@@ -1,0 +1,76 @@
+*.py[cod]
+
+# C extensions
+# *.so
+
+# pycharm
+.idea
+
+# Packages
+# *.egg
+# *.egg-info
+build
+eggs
+parts
+# bin
+var
+sdist
+develop-eggs
+.installed.cfg
+# lib
+lib64
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Complexity
+output/*.html
+output/*/index.html
+
+# Sphinx
+docs/_build
+
+# Cookiecutter
+output/
+
+# Test Data
+data/**
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Test results
+tests/results/
+
+# .env files
+.env
+.config.yml
+.env*
+
+# html test coverage
+htmlcov/
+
+# logs
+/tests/test_data/log/*.log
+/logs
+
+# debug scripts
+debug/*
+!debug/keep/
+
+# api
+api/logs/*
+!api/logs/.gitkeep
+/main.db
+
+# tmp files
+/.pytest_cache/
+/.cache/
+
+# documentation
+api/static/docs
