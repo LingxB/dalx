@@ -9,7 +9,8 @@ from src.utils.seed_words import amazon_seeds
 '''
 # Word vector explorer
 
-Streamlit is awessome!
+Amazon review word embeddings with PCA to 2d vectors
+
 '''
 
 @st.cache
