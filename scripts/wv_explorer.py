@@ -2,8 +2,8 @@ import sys
 sys.path.append('P:\Projects\dalx')
 import pandas as pd
 import streamlit as st
-import altair as alt
 from src.utils.seed_words import amazon_seeds
+from src.utils.st_utils import set_polarity, plot_chart
 
 
 '''
@@ -18,31 +18,10 @@ def load_vectors(path, top_words=5000):
     df = pd.read_parquet(path).reset_index()
     return df.iloc[:top_words,:]
 
-def set_polarity(df, positive=None, negative=None):
-    _df = df.copy()
-    _df['POLARITY'] = 'unk'
-    if positive:
-        _df['POLARITY'].loc[_df['WORD'].isin(positive)] = '+'
-    if negative:
-        _df['POLARITY'].loc[_df['WORD'].isin(negative)] = '-'
-    return _df
 
-def plot_chart(df):
-    wv_chart = alt.Chart(df).mark_circle().encode(
-        x='X',
-        y='Y',
-        color=alt.Color(
-            'POLARITY', scale=alt.Scale(
-                domain=['unk', '+', '-'],
-                range=['#d6d6d6', '#1f77b4', '#ff7f0e']
 
-            )
-        ),
-        tooltip=['WORD', 'POLARITY']
-    ).interactive()
-
-    st.write(wv_chart)
-
+# START
+# -----
 
 wvdf = load_vectors('data\processed/amazon_2d.parquet')
 positive_seeds, negative_seeds = amazon_seeds()
@@ -57,7 +36,7 @@ f'''
 
 wvdf = set_polarity(wvdf, positive_seeds, negative_seeds)
 
-if st.checkbox('Show dataframe with lexicon words'):
+if st.checkbox('Show dataframe with seed words'):
     wvdf
 
 plot_chart(wvdf)
@@ -66,7 +45,6 @@ plot_chart(wvdf)
 '''
 ---
 '''
-
 
 wvdf = load_vectors('data\processed/amazon_2d.parquet')
 
@@ -86,17 +64,35 @@ f'''
 **Negative words**: {negative_words[500:520]} ...
 '''
 
-if st.checkbox('Show dataframe'):
+if st.checkbox('Show dataframe with original lexicon words'):
     wvdf
 
 plot_chart(wvdf)
 
 
+'''
+---
+'''
 
+wvdf = load_vectors('data\processed/amazon_2d.parquet')
+score_df = pd.read_csv('data/output/lexicon_table_dalx.csv', index_col='WORD')
+pos = score_df.loc[score_df.DALX==1].index.tolist()
+neg = score_df.loc[score_df.DALX==0].index.tolist()
 
+wvdf = set_polarity(wvdf, pos, neg)
 
+f'''
+## Exploring domain adapted lexicon
 
+**Positive words**: {pos[:20]} ...
 
+**Negative words**: {neg[:20]} ...
+'''
+
+if st.checkbox('Show dataframe with domain adapted words'):
+    wvdf
+
+plot_chart(wvdf)
 
 
 
