@@ -1,4 +1,5 @@
 from sklearn.svm import LinearSVC
+from sklearn.calibration import CalibratedClassifierCV
 from sklearn.model_selection import GridSearchCV
 import pandas as pd
 from gensim.models import Word2Vec
@@ -25,6 +26,7 @@ print(f'best_score(acc.)={gs.best_score_:.2%}; best_param={gs.best_params_}')
 
 c = gs.best_params_['C']
 
+# svc = CalibratedClassifierCV(LinearSVC(C=c, verbose=1, random_state=42, max_iter=5000))
 svc = LinearSVC(C=c, verbose=1, random_state=42, max_iter=5000)
 svc.fit(X, y)
 
@@ -38,10 +40,25 @@ svc.fit(X, y)
 
 # PREDICT
 # -------
+w2vec_model = Word2Vec.load('data/raw/amazon/Electronics.bin')
+
+
+# _x = w2vec_model['positive'].reshape(1,-1)
+#
+# svc.predict(_x)
+#
+# svc.predict_proba(_x)
+#
+# svc.decision_function(_x)
+
+
+
+
+
+
 lx_df = pd.read_csv('data/processed/lexicon_table_v2.csv', index_col='WORD')
 lx_words = lx_df.index.tolist() # 13297
 
-w2vec_model = Word2Vec.load('data/raw/amazon/Electronics.bin')
 vocabs = set(w2vec_model.wv.index2entity) # 43750
 score_words = [w for w in lx_words if w in vocabs] # 5687
 score_vectors = np.concatenate([w2vec_model[w].reshape(1,-1) for w in score_words])
