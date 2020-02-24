@@ -75,6 +75,6 @@ for idx,row in score_df.iterrows():
     if not np.isnan(dalx_val):
         score_df.loc[idx] = dalx_val
 
-score_df.to_csv('data/output/lexicon_table_dalx.csv')
+score_df.to_csv('data/output/lexicon_table_dalx_00.csv')
 
 
