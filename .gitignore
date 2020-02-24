@@ -35,11 +35,9 @@ output/*/index.html
 # Sphinx
 docs/_build
 
-# Cookiecutter
-output/
 
-# Test Data
-data/**
+# Data
+data/raw/
 
 # Notebook checkpoints
 .ipynb_checkpoints/
