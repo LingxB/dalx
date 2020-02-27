@@ -56,7 +56,7 @@ for w in score_words:
     _x = w2vec_model[w].reshape(1,-1)
     if conf_threshold:
         prob = svc.predict_proba(_x)
-        if max(prob) < conf_threshold:
+        if prob.max() < conf_threshold:
             print(f'Skipping {w} for {prob}')
             prediction.append(np.nan)
         else:
