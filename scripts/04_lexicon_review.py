@@ -14,7 +14,7 @@ vocab = read_yaml('data/SemEval15_laptop/glove_symdict.yml')
 atlx = pd.read_csv('data/processed/lexicon_table_v2.csv', index_col='WORD')
 atlx['ATLX'] = atlx.mean(axis=1).apply(lambda p: -1 if p < 0 else (0 if p==0 else 1))
 
-dalx = pd.read_csv('data/output/lexicon_table_dalx_03.csv', index_col='WORD')
+dalx = pd.read_csv('data/output/lexicon_table_dalx_05_thres0.7_C10.csv', index_col='WORD')
 
 diff_df = atlx.join(dalx[['DALX']])
 diff_df['INVOCAB'] = diff_df.index.isin(vocab)
@@ -25,21 +25,28 @@ diff_df['INVOCAB'] = diff_df.index.isin(vocab)
 diff_df.INVOCAB.value_counts() # 839
 
 
-# Words that changed polarity by SVM
-diff_df.loc[(diff_df.DALX.notna()) & (diff_df.ATLX != diff_df.DALX)] # 1962
+# Words that changed polarity by SVM                                 # 03   05_C10 05_C10_T.7
+diff_df.loc[(diff_df.DALX.notna()) & (diff_df.ATLX != diff_df.DALX)] # 1962 2058   308
 
-# Words in S15 vocab but not changed polarity by SVM
-diff_df.loc[(diff_df.DALX.notna()) & (diff_df.ATLX == diff_df.DALX) & (diff_df.INVOCAB == True)] # 530
+# Words in S15 vocab but not changed polarity by SVM                                               03  05_C10 05_C10_T
+diff_df.loc[(diff_df.DALX.notna()) & (diff_df.ATLX == diff_df.DALX) & (diff_df.INVOCAB == True)] # 530 534    326
 
-# Words in S15 vocab and changed polarity by SVM
-diff_df.loc[(diff_df.DALX.notna()) & (diff_df.ATLX != diff_df.DALX) & (diff_df.INVOCAB == True)] # 304
+# Words in S15 vocab and changed polarity by SVM                                                 # 03  05_C10 05_C10_T
+diff_df.loc[(diff_df.DALX.notna()) & (diff_df.ATLX != diff_df.DALX) & (diff_df.INVOCAB == True)] # 304 300    109
 
 
-# A lot of words become negative
-#  ATLX        DALX
+# 03 - 304 total A lot of words become negative
+#       ATLX   DALX
 #  1    137    103
 #  0    110    NaN
 # -1     57    201
+
+# 05 - 300 total
+#       ATLX   DALX
+# -1    127    100
+#  0    110    NaN
+#  1     63    200
+
 
 search_keyword(corpus, 'air')
 search_keyword(corpus, 'better')
