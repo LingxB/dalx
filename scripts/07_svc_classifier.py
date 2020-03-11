@@ -9,14 +9,14 @@ import numpy as np
 # TRAIN
 # -----
 
-df = pd.read_csv('data/processed/seed_vectors.csv', index_col='SEED')
+df = pd.read_csv('data/processed/seed_vectors_06.csv', index_col='SEED')
 
 X = df[[str(i) for i in range(500)]].values.astype('float32')
 y = df['LABELS'].values.astype('int32')
 
 
 # Search for best C
-svc = SVC(kernel='linear', random_state=42, probability=True)
+svc = SVC(kernel='rbf', random_state=42, probability=True)
 params = [
     {'C': [0.001, 0.01, 0.1, 1, 10]}
 ]
@@ -26,7 +26,7 @@ print(f'best_score(acc.)={gs.best_score_:.2%}; best_param={gs.best_params_}')
 
 
 c = gs.best_params_['C']
-svc = SVC(C=c, kernel='linear', verbose=True, random_state=42, probability=True)
+svc = SVC(C=1.0, kernel='rbf', verbose=True, random_state=42, probability=True)
 svc.fit(X, y)
 
 
@@ -75,6 +75,6 @@ for idx,row in score_df.iterrows():
 
 score_df.loc['sharp']
 
-score_df.to_csv('data/output/lexicon_table_dalx_05_thres0.7_C0.1.csv')
+score_df.to_csv('data/output/lexicon_table_dalx_07_thres0.7_C1.csv')
 
 

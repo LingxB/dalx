@@ -48,3 +48,8 @@ def adj_seeds():
 
 def hist_seeds():
     return POSITIVE_HIST, NEGATIVE_HIST
+
+def all_seeds():
+    pos = sorted(set(POSITIVE_TURNEY + POSITIVE_FINANCE + POSITIVE_TWEET + POSITIVE_HIST + POSITIVE_ADJ + POSITIVE_ADJ_MOVIE))
+    neg = sorted(set(NEGATIVE_TURNEY + NEGATIVE_FINANCE + NEGATIVE_TWEET + NEGATIVE_HIST + NEGATIVE_ADJ + NEGATIVE_ADJ_MOVIE))
+    return pos, neg
