@@ -26,7 +26,7 @@ print(f'best_score(acc.)={gs.best_score_:.2%}; best_param={gs.best_params_}')
 
 
 c = gs.best_params_['C']
-svc = SVC(C=1.0, kernel='rbf', verbose=True, random_state=42, probability=True)
+svc = SVC(C=c, kernel='rbf', verbose=True, random_state=42, probability=True)
 svc.fit(X, y)
 
 
