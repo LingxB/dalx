@@ -60,3 +60,12 @@ def all_seeds():
 
 def semeval15_aspects():
     return SEMEVAL15_ASPECTS
+
+
+# SEED WORD ASPECT THOUGHTS
+# cheap, cheaper, cheapest
+# sharp, sharper, sharpest
+# sensitive
+# giant
+# fancy
+# killer
