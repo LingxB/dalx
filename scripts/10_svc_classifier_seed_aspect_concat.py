@@ -83,7 +83,7 @@ for idx,row in score_df.iterrows():
 
 score_df.loc['sharp']
 
-score_df.to_csv('data/output/lexicon_table_dalx_asp_10_thres0.7_C10.csv')
+score_df.to_csv('data/output/lexicon_table_dalx_asp_10_thres0.7_C10_concat.csv')
 
 
 # for w in lx_df.index.get_level_values('WORD').unique():
