@@ -18,6 +18,8 @@ def load_semeval15_laptop(train, test):
     _test['IS_TRAIN'] = False
     return pd.concat([_train, _test], ignore_index=True)
 
+def load_semeval14_restruant(train, test):
+    return load_semeval15_laptop(train, test)
 
 def search_keyword(df, key: str, col: str = 'SENT'):
     in_sent = df[col].apply(lambda s: True if key in s.split() else False)
