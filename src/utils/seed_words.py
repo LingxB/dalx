@@ -23,6 +23,13 @@ NEGATIVE_ADJ_MOVIE = ["bad", "bland", "horrible", "disgusting", "poor", "banal",
 
 SEMEVAL15_ASPECTS = ['connectivity', 'design', 'general', 'miscellaneous', 'performance', 'portability', 'price', 'quality', 'usability']
 
+NEUTRAL_WORDS = ['absolutely', 'actual', 'actually', 'air', 'anyway', 'baby', 'basically', # 'comment', 'consequently', 'could',
+                 'difference', 'else', 'entirely', 'exact', 'exactly', 'expression', 'eyebrows', # 'fact', 'feel', 'feelings',
+                 'idea', 'imagination', 'information', 'intention', 'judgement', 'know', 'likely', # 'mentality', 'most', 'mostly',
+                 'much', 'nature', 'opinion', 'particular', 'particularly', 'perhaps', 'point', # 'possibility', 'possible', 'reveal',
+                 'seem', 'should', 'so', 'such', 'think', 'thinking', 'to', # 'transport', 'very', 'would'
+                 ]
+
 
 def movies_seeds():
     return POSITIVE_ADJ_MOVIE, NEGATIVE_ADJ_MOVIE
@@ -60,6 +67,14 @@ def all_seeds():
 
 def semeval15_aspects():
     return SEMEVAL15_ASPECTS
+
+
+def all_seeds_with_neutral():
+    pos, neg = all_seeds()
+    neu = sorted(set(NEUTRAL_WORDS))
+    return pos, neg, neu
+
+
 
 
 # SEED WORD ASPECT THOUGHTS
