@@ -23,6 +23,6 @@ avg_annotated['AA2'] = avg_annotated.AVG_ANNOTATION
 
 
 
-pure_annotated.to_csv('data/output/lexicon_table_dalx_15_gold.csv')
-avg_annotated.to_csv('data/output/lexicon_table_dalx_15_gold_avg.csv')
-gold_lx.to_csv('data/output/lexicon_table_dalx_15_out_ref.csv')
+pure_annotated.to_csv('data/output/lexicon_table_dalx_15_gold_v2.csv')
+avg_annotated.to_csv('data/output/lexicon_table_dalx_15_gold_avg_v2.csv')
+gold_lx.to_csv('data/output/lexicon_table_dalx_15_out_ref_v2.csv')
